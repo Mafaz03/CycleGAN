@@ -7,6 +7,7 @@ class ConvBlock(nn.Module):
 
         self.conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels, padding_mode="reflect", **kwargs) if down else nn.ConvTranspose2d(in_channels, out_channels, **kwargs),
+            nn.InstanceNorm2d(out_channels),           
             nn.ReLU(inplace=True) if use_act else nn.Identity() # no ops
         )
     def forward(self, x):
