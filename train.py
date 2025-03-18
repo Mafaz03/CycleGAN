@@ -1,7 +1,5 @@
-import ssl
-import certifi
-
-ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=certifi.where())
+import wandb
+import os
 import torch
 import torch.amp
 from dataset import CycleGANDataset
@@ -16,15 +14,12 @@ from torchvision.utils import save_image
 from Discriminator import Discriminator
 from Generator import Generator
 
-def train(disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
+def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
     loop = tqdm(loader, leave=True)
 
     for idx, (a, b) in enumerate(loop):
         a = a.to(config.DEVICE)
         b = b.to(config.DEVICE)
-
-        print(a.shape)
-        print(b.shape)
 
         with torch.autocast("cuda"):
             fake_A = gen_A(b)
@@ -91,10 +86,21 @@ def train(disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_sc
         if idx % 200 == 0:
             save_image(fake_A * 0.5 + 0.5, f"saved_images/A_{idx}.png")
             save_image(fake_B * 0.5 + 0.5, f"saved_images/B_{idx}.png")
-
+            wandb.log({
+                "Generated A Images": [wandb.Image(f"saved_images_A_{epoch}.png", caption=f"Epoch {epoch} - A Generated")]
+                "Generated B Images": [wandb.Image(f"saved_images_B_{epoch}.png", caption=f"Epoch {epoch} - B Generated")]
+            })
+            
         loop.set_postfix(G_loss=G_loss.item())
 
-def main():
+        wandb.log({
+                "G_loss": G_loss.item(),
+                "D_loss": D_loss.item()
+            })
+
+def main(wandb_api_key, project):
+    wandb.login(key=wandb_api_key)
+    wandb.init(project=project)
     disc_A = Discriminator(in_channels=3).to(config.DEVICE)
     disc_B = Discriminator(in_channels=3).to(config.DEVICE)
 
@@ -155,6 +161,7 @@ def main():
 
     for epoch in range(config.NUM_EPOCHS):
         train(
+            epoch,
             disc_A,
             disc_B,
             gen_B,
@@ -175,4 +182,5 @@ def main():
             save_checkpoint(disc_B, opt_disc, filename=config.CHECKPOINT_DISC_B)
 
 if __name__ == "__main__":
-    main()
+    os.makedirs("saved_images", exist_ok=True)
+    main(wandb_api_key, project)
