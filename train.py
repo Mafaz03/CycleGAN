@@ -17,10 +17,6 @@ from config import KAGGLE_STR
 from torch.cuda.amp import autocast, GradScaler
 
 def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
-    gen_A = gen_A.half()  # Cast the generator model to float16
-    disc_A = disc_A.half()  # Cast the discriminator model to float16
-    gen_B = gen_B.half()  # Cast the generator model to float16
-    disc_B = disc_B.half()
 
     loop = tqdm(loader, leave=True)
 
@@ -31,8 +27,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         # with torch.autocast("cuda"):
         with autocast():
             # Discriminator A
-            fake_A = gen_A(b.type(torch.cuda.HalfTensor))
-            
+            fake_A = gen_A(b)
             disc_real_A = disc_A(a)
             disc_fake_A = disc_A(fake_A.detach())
             disc_real_loss_A = mse(disc_real_A, torch.ones_like(disc_real_A))
@@ -172,6 +167,11 @@ def main(wandb_api_key, project):
 
     g_scaler = torch.cuda.amp.GradScaler()
     d_scaler = torch.cuda.amp.GradScaler()
+
+    disc_A = disc_A.to(config.DEVICE)
+    disc_B = disc_B.to(config.DEVICE)
+    gen_A = gen_A.to(config.DEVICE)
+    gen_B = gen_B.to(config.DEVICE)
 
     for epoch in range(config.NUM_EPOCHS):
         train(
