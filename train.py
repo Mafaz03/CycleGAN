@@ -32,6 +32,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         with autocast():
             # Discriminator A
             fake_A = gen_A(b.type(torch.cuda.HalfTensor))
+            
             disc_real_A = disc_A(a)
             disc_fake_A = disc_A(fake_A.detach())
             disc_real_loss_A = mse(disc_real_A, torch.ones_like(disc_real_A))
