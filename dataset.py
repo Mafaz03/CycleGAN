@@ -38,7 +38,7 @@ class CycleGANDataset(Dataset):
 
 ## Testing
 if __name__ == "__main__":
-    ds = CycleGANDataset(root_A=config.TRAIN_DIR_A, root_B=config.TRAIN_DIR_B)
+    ds = CycleGANDataset(root_A=config.TRAIN_DIR_A, root_B=config.TRAIN_DIR_B, transform=config.transforms)
     dl = DataLoader(ds, batch_size=2)
     images = next(iter(dl))
     print(images[0].shape)

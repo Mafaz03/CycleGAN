@@ -31,6 +31,7 @@ class Generator(nn.Module):
 
         self.initial = nn.Sequential(
             ConvBlock(img_channels, num_features, kernel_size=7, stride = 1, padding = 3),
+            nn.InstanceNorm2d(num_features),
             nn.ReLU(inplace=True)
         )
 

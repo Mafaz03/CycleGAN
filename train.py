@@ -20,8 +20,11 @@ def train(disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_sc
     loop = tqdm(loader, leave=True)
 
     for idx, (a, b) in enumerate(loop):
-        b = b.to(config.DEVICE)
         a = a.to(config.DEVICE)
+        b = b.to(config.DEVICE)
+
+        print(a.shape)
+        print(b.shape)
 
         with torch.autocast("cuda"):
             fake_A = gen_A(b)
@@ -138,7 +141,7 @@ def main():
             opt_disc,
             config.LEARNING_RATE,
         )
-    dataset = CycleGANDataset(root_A=config.TRAIN_DIR_A, root_B=config.TRAIN_DIR_B)
+    dataset = CycleGANDataset(root_A=config.TRAIN_DIR_A, root_B=config.TRAIN_DIR_B, transform=config.transforms)
     loader = DataLoader(
         dataset=dataset, 
         batch_size=config.BATCH_SIZE, 

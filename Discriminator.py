@@ -14,7 +14,7 @@ class Block(nn.Module):
                       padding=1,
                       padding_mode="reflect"),
             nn.InstanceNorm2d(out_channels),
-            nn.LeakyReLU(0.2)
+            nn.LeakyReLU(0.2, inplace=True)
             )
 
     def forward(self, x):
@@ -33,7 +33,7 @@ class Discriminator(nn.Module):
             padding=1,
             padding_mode="reflect"
             ),
-            nn.LeakyReLU(0.2),
+            nn.LeakyReLU(0.2, inplace=True),
         )
 
         layers = []
