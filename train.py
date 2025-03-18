@@ -92,8 +92,8 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         
         # Logging to WandB and saving images
         if idx % 200 == 0:
-            save_image(fake_A * 0.5 + 0.5, KAGGLE_STR + f"saved_images/A_{idx}.png")
-            save_image(fake_B * 0.5 + 0.5, KAGGLE_STR + f"saved_images/B_{idx}.png")
+            save_image(fake_A[:5] * 0.5 + 0.5, KAGGLE_STR + f"saved_images/A_{idx}.png")
+            save_image(fake_B[:5] * 0.5 + 0.5, KAGGLE_STR + f"saved_images/B_{idx}.png")
             wandb.log({
                 "Generated A Images": [wandb.Image(KAGGLE_STR + f"saved_images/A_{idx}.png", caption=f"Epoch {epoch} - A -> B Generated")],
                 "Generated B Images": [wandb.Image(KAGGLE_STR + f"saved_images/B_{idx}.png", caption=f"Epoch {epoch} - B -> A Generated")]
