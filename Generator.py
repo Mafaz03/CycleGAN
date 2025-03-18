@@ -8,7 +8,7 @@ class ConvBlock(nn.Module):
         self.conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels, padding_mode="reflect", bias=False, **kwargs) if down else nn.ConvTranspose2d(in_channels, out_channels, bias=False, **kwargs),
             nn.InstanceNorm2d(out_channels),           
-            nn.ReLU(inplace=False) if use_act else nn.Identity() # no ops
+            nn.ReLU(inplace=True) if use_act else nn.Identity() # no ops
         )
     def forward(self, x):
         return self.conv(x)
@@ -32,7 +32,7 @@ class Generator(nn.Module):
         self.initial = nn.Sequential(
             ConvBlock(img_channels, num_features, kernel_size=7, stride = 1, padding = 3),
             nn.InstanceNorm2d(num_features),
-            nn.ReLU(inplace=False)
+            nn.ReLU(inplace=True)
         )
 
         self.down_blocks = nn.ModuleList(
