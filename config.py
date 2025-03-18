@@ -3,7 +3,8 @@ import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-TRAIN_DIR = "data/train"
+TRAIN_DIR_A = "data/horse2zebra/trainA"
+TRAIN_DIR_B = "data/horse2zebra/trainB"
 VAL_DIR = "data/val"
 BATCH_SIZE = 1
 LEARNING_RATE = 1e-5
@@ -13,10 +14,10 @@ NUM_WORKERS = 4
 NUM_EPOCHS = 10
 LOAD_MODEL = False
 SAVE_MODEL = True
-CHECKPOINT_GEN_H = "genh.pth.tar"
-CHECKPOINT_GEN_Z = "genz.pth.tar"
-CHECKPOINT_CRITIC_H = "critich.pth.tar"
-CHECKPOINT_CRITIC_Z = "criticz.pth.tar"
+CHECKPOINT_GEN_A = "gena.pth.tar"
+CHECKPOINT_GEN_B = "genb.pth.tar"
+CHECKPOINT_DISC_A = "disca.pth.tar"
+CHECKPOINT_DISC_B = "discb.pth.tar"
 
 transforms = A.Compose(
     [
