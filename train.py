@@ -14,6 +14,7 @@ from torchvision.utils import save_image
 from Discriminator import Discriminator
 from Generator import Generator
 from config import KAGGLE_STR
+from torch.cuda.amp import autocast
 
 def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
     loop = tqdm(loader, leave=True)
@@ -22,7 +23,8 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         a = a.to(config.DEVICE)
         b = b.to(config.DEVICE)
 
-        with torch.autocast("cuda"):
+        # with torch.autocast("cuda"):
+        with autocast():
             fake_A = gen_A(b)
             disc_real_A = disc_A(a)
             disc_fake_A = disc_A(b.detach())
@@ -44,7 +46,8 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         d_scaler.step(opt_disc)
         d_scaler.update()
 
-        with torch.autocast("cuda"):
+        # with torch.autocast("cuda"):
+        with autocast():
             # adversarial loss for both generators
             disc_fake_A = disc_A(fake_A)
             disc_fake_B = disc_B(fake_B)
