@@ -24,7 +24,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         a = a.to(config.DEVICE)
         b = b.to(config.DEVICE)
 
-        with autocast()
+        with autocast():
             # Discriminator A
             fake_A = gen_A(b)
             disc_real_A = disc_A(a)
