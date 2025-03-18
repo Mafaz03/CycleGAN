@@ -24,8 +24,8 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         a = a.to(config.DEVICE)
         b = b.to(config.DEVICE)
 
-        # with torch.autocast("cuda"):
-        with autocast():
+        with torch.autocast("cuda"):
+        # with autocast():
             # Discriminator A
             fake_A = gen_A(b)
             disc_real_A = disc_A(a)
@@ -51,7 +51,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         d_scaler.update()
 
         # Generator loss
-        with autocast():
+        with torch.autocast("cuda"):
             # Adversarial loss for both generators
             disc_fake_A = disc_A(fake_A)
             disc_fake_B = disc_B(fake_B)
@@ -96,8 +96,8 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
             save_image(fake_A * 0.5 + 0.5, KAGGLE_STR + f"saved_images/A_{idx}.png")
             save_image(fake_B * 0.5 + 0.5, KAGGLE_STR + f"saved_images/B_{idx}.png")
             wandb.log({
-                "Generated A Images": [wandb.Image(KAGGLE_STR + f"saved_images/A_{idx}.png", caption=f"Epoch {epoch} - A Generated")],
-                "Generated B Images": [wandb.Image(KAGGLE_STR + f"saved_images/B_{idx}.png", caption=f"Epoch {epoch} - B Generated")]
+                "Generated A Images": [wandb.Image(KAGGLE_STR + f"saved_images/A_{idx}.png", caption=f"Epoch {epoch} - A -> B Generated")],
+                "Generated B Images": [wandb.Image(KAGGLE_STR + f"saved_images/B_{idx}.png", caption=f"Epoch {epoch} - B -> A Generated")]
             })
 
         loop.set_postfix(G_loss=G_loss.item())
@@ -189,7 +189,7 @@ def main(wandb_api_key, project):
             g_scaler,
         )
 
-        if epoch % (config.NUM_EPOCHS//5) and config.SAVE_MODEL:
+        if epoch % (config.NUM_EPOCHS // 5) == 0 or epoch == config.NUM_EPOCHS - 1 and config.SAVE_MODEL:
             save_checkpoint(gen_A, opt_gen, filename=config.CHECKPOINT_GEN_A)
             save_checkpoint(gen_B, opt_gen, filename=config.CHECKPOINT_GEN_B)
             save_checkpoint(disc_A, opt_disc, filename=config.CHECKPOINT_DISC_A)
