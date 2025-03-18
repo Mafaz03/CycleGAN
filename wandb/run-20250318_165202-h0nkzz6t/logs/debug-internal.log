@@ -1,0 +1,11 @@
+{"time":"2025-03-18T16:52:02.657728+05:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2025-03-18T16:52:02.657786+05:30","level":"INFO","msg":"created symlink","path":"/Users/mohamedmafaz/Desktop/CycleGAN/wandb/run-20250318_165202-h0nkzz6t/logs/debug-core.log"}
+{"time":"2025-03-18T16:52:02.773602+05:30","level":"INFO","msg":"created new stream","id":"h0nkzz6t"}
+{"time":"2025-03-18T16:52:02.773654+05:30","level":"INFO","msg":"stream: started","id":"h0nkzz6t"}
+{"time":"2025-03-18T16:52:02.773685+05:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"h0nkzz6t"}}
+{"time":"2025-03-18T16:52:02.773898+05:30","level":"INFO","msg":"sender: started","stream_id":"h0nkzz6t"}
+{"time":"2025-03-18T16:52:02.77394+05:30","level":"INFO","msg":"handler: started","stream_id":{"value":"h0nkzz6t"}}
+{"time":"2025-03-18T16:52:03.230747+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T16:54:02.176631+05:30","level":"INFO","msg":"stream: closing","id":"h0nkzz6t"}
+{"time":"2025-03-18T16:54:02.176888+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T16:54:02.178827+05:30","level":"INFO","msg":"Stopped system monitor"}

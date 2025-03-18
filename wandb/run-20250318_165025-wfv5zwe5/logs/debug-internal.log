@@ -1,0 +1,16 @@
+{"time":"2025-03-18T16:50:25.846218+05:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2025-03-18T16:50:25.846256+05:30","level":"INFO","msg":"created symlink","path":"/Users/mohamedmafaz/Desktop/CycleGAN/wandb/run-20250318_165025-wfv5zwe5/logs/debug-core.log"}
+{"time":"2025-03-18T16:50:26.163151+05:30","level":"INFO","msg":"created new stream","id":"wfv5zwe5"}
+{"time":"2025-03-18T16:50:26.163228+05:30","level":"INFO","msg":"stream: started","id":"wfv5zwe5"}
+{"time":"2025-03-18T16:50:26.163376+05:30","level":"INFO","msg":"sender: started","stream_id":"wfv5zwe5"}
+{"time":"2025-03-18T16:50:26.163354+05:30","level":"INFO","msg":"handler: started","stream_id":{"value":"wfv5zwe5"}}
+{"time":"2025-03-18T16:50:26.163314+05:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"wfv5zwe5"}}
+{"time":"2025-03-18T16:50:26.669744+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T16:50:44.450656+05:30","level":"INFO","msg":"stream: closing","id":"wfv5zwe5"}
+{"time":"2025-03-18T16:50:44.452217+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T16:50:44.458345+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T16:50:48.905916+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T16:50:49.196718+05:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"wfv5zwe5"}}
+{"time":"2025-03-18T16:50:49.196775+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"wfv5zwe5"}}
+{"time":"2025-03-18T16:50:49.196794+05:30","level":"INFO","msg":"sender: closed","stream_id":"wfv5zwe5"}
+{"time":"2025-03-18T16:50:49.197245+05:30","level":"INFO","msg":"stream: closed","id":"wfv5zwe5"}

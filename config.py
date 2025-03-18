@@ -1,6 +1,10 @@
 import torch
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+import os
+
+def is_running_on_kaggle():
+    return "KAGGLE_KERNEL_RUN_TYPE" in os.environ
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 TRAIN_DIR_A = "data/horse2zebra/trainA"
@@ -14,10 +18,14 @@ NUM_WORKERS = 4
 NUM_EPOCHS = 10
 LOAD_MODEL = False
 SAVE_MODEL = True
-CHECKPOINT_GEN_A = "gena.pth.tar"
-CHECKPOINT_GEN_B = "genb.pth.tar"
-CHECKPOINT_DISC_A = "disca.pth.tar"
-CHECKPOINT_DISC_B = "discb.pth.tar"
+
+KAGGLE_STR = "/kaggle/working/" if is_running_on_kaggle() else ""
+
+CHECKPOINT_GEN_A = KAGGLE_STR + "gena.pth.tar"
+CHECKPOINT_GEN_B = KAGGLE_STR + "genb.pth.tar"
+CHECKPOINT_DISC_A = KAGGLE_STR + "disca.pth.tar"
+CHECKPOINT_DISC_B = KAGGLE_STR + "discb.pth.tar"
+
 
 transforms = A.Compose(
     [

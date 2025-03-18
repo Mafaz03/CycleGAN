@@ -1,0 +1,39 @@
+{
+  "os": "macOS-15.2-arm64-arm-64bit",
+  "python": "3.11.5",
+  "startedAt": "2025-03-18T11:22:02.652031Z",
+  "program": "/Users/mohamedmafaz/Desktop/CycleGAN/train.py",
+  "codePath": "train.py",
+  "git": {
+    "remote": "https://github.com/Mafaz03/CycleGAN.git",
+    "commit": "568ad0e5f6db19a3558dbde4c2418919149e9324"
+  },
+  "email": "mohdmafaz200303@gmail.com",
+  "root": "/Users/mohamedmafaz/Desktop/CycleGAN",
+  "host": "Mohameds-MacBook-Air-3.local",
+  "username": "mohamedmafaz",
+  "executable": "/usr/local/bin/python3",
+  "codePathLocal": "train.py",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "245107195904",
+      "used": "210548310016"
+    }
+  },
+  "memory": {
+    "total": "8589934592"
+  },
+  "cpu": {
+    "count": 8,
+    "countLogical": 8
+  },
+  "apple": {
+    "name": "Apple M2",
+    "ecpuCores": 4,
+    "pcpuCores": 4,
+    "gpuCores": 10,
+    "memoryGb": 8
+  }
+}

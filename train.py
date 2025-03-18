@@ -13,6 +13,7 @@ from tqdm import tqdm
 from torchvision.utils import save_image
 from Discriminator import Discriminator
 from Generator import Generator
+from config import KAGGLE_STR
 
 def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
     loop = tqdm(loader, leave=True)
@@ -84,13 +85,13 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         g_scaler.update()
         
         if idx % 200 == 0:
-            save_image(fake_A * 0.5 + 0.5, f"saved_images/A_{idx}.png")
-            save_image(fake_B * 0.5 + 0.5, f"saved_images/B_{idx}.png")
+            save_image(fake_A * 0.5 + 0.5, KAGGLE_STR + f"saved_images/A_{idx}.png")
+            save_image(fake_B * 0.5 + 0.5, KAGGLE_STR + f"saved_images/B_{idx}.png")
             wandb.log({
-                "Generated A Images": [wandb.Image(f"saved_images_A_{epoch}.png", caption=f"Epoch {epoch} - A Generated")]
-                "Generated B Images": [wandb.Image(f"saved_images_B_{epoch}.png", caption=f"Epoch {epoch} - B Generated")]
+                "Generated A Images": [wandb.Image(KAGGLE_STR + f"saved_images/A_{epoch}.png", caption=f"Epoch {epoch} - A Generated")],
+                "Generated B Images": [wandb.Image(KAGGLE_STR + f"saved_images/B_{epoch}.png", caption=f"Epoch {epoch} - B Generated")]
             })
-            
+
         loop.set_postfix(G_loss=G_loss.item())
 
         wandb.log({
@@ -175,7 +176,7 @@ def main(wandb_api_key, project):
             g_scaler,
         )
 
-        if config.SAVE_MODEL:
+        if epoch % (config.NUM_EPOCHS//5) and config.SAVE_MODEL:
             save_checkpoint(gen_A, opt_gen, filename=config.CHECKPOINT_GEN_A)
             save_checkpoint(gen_B, opt_gen, filename=config.CHECKPOINT_GEN_B)
             save_checkpoint(disc_A, opt_disc, filename=config.CHECKPOINT_DISC_A)
@@ -183,4 +184,4 @@ def main(wandb_api_key, project):
 
 if __name__ == "__main__":
     os.makedirs("saved_images", exist_ok=True)
-    main(wandb_api_key, project)
+    main("<wandb api key here>", "CycleGAN")

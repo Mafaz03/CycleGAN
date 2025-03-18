@@ -1,0 +1,27 @@
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/cuda/amp/grad_scaler.py:120: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+  warnings.warn("torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.")
+  0%|                                                                                                                                                   | 0/1334 [00:00<?, ?it/s]/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/amp/autocast_mode.py:204: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+  warnings.warn('User provided device_type of \'cuda\', but CUDA is not available. Disabling')
+  0%|                                                                                                                            | 1/1334 [00:12<4:32:21, 12.26s/it, G_loss=9.82]/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/amp/autocast_mode.py:204: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+  warnings.warn('User provided device_type of \'cuda\', but CUDA is not available. Disabling')
+  5%|██████▍                                                                                                                      | 69/1334 [01:56<40:47,  1.94s/it, G_loss=9.47]Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x15695c900>
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1477, in __del__
+    def __del__(self):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 36947) is killed by signal: Interrupt: 2.
+  5%|██████▍                                                                                                                      | 69/1334 [01:58<36:11,  1.72s/it, G_loss=9.47]
+Traceback (most recent call last):
+  File "/Users/mohamedmafaz/Desktop/CycleGAN/train.py", line 186, in <module>
+    main("160fb2b5d5c5791978cce34bd4d7cf472ef06847", "CycleGAN")
+  File "/Users/mohamedmafaz/Desktop/CycleGAN/train.py", line 163, in main
+    train(
+  File "/Users/mohamedmafaz/Desktop/CycleGAN/train.py", line 82, in train
+    g_scaler.scale(G_loss).backward()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
