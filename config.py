@@ -19,7 +19,7 @@ NUM_EPOCHS = 10
 LOAD_MODEL = False
 SAVE_MODEL = True
 
-KAGGLE_STR = "/kaggle/working/" if is_running_on_kaggle() else ""
+KAGGLE_STR = "/kaggle/working/CycleGAN/" if is_running_on_kaggle() else ""
 
 CHECKPOINT_GEN_A = KAGGLE_STR + "gena.pth.tar"
 CHECKPOINT_GEN_B = KAGGLE_STR + "genb.pth.tar"
