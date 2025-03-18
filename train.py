@@ -24,7 +24,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         a = a.to(config.DEVICE)
         b = b.to(config.DEVICE)
 
-        with torch.cuda.amp.GradScaler():
+        with autocast()
             # Discriminator A
             fake_A = gen_A(b)
             disc_real_A = disc_A(a)
@@ -50,7 +50,7 @@ def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, ms
         d_scaler.update()
 
         # Generator loss
-        with torch.cuda.amp.GradScaler():
+        with autocast():
             # Adversarial loss for both generators
             disc_fake_A = disc_A(fake_A)
             disc_fake_B = disc_B(fake_B)
