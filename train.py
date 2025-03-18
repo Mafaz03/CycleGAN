@@ -17,6 +17,11 @@ from config import KAGGLE_STR
 from torch.cuda.amp import autocast, GradScaler
 
 def train(epoch, disc_A, disc_B, gen_B, gen_A, loader, opt_disc, opt_gen, l1, mse, d_scaler, g_scaler):
+    gen_A = gen_A.half()  # Cast the generator model to float16
+    disc_A = disc_A.half()  # Cast the discriminator model to float16
+    gen_B = gen_B.half()  # Cast the generator model to float16
+    disc_B = disc_B.half()
+
     loop = tqdm(loader, leave=True)
 
     for idx, (a, b) in enumerate(loop):
